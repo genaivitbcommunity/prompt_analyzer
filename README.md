@@ -18,7 +18,7 @@ As large Language Models (LLMs) have become central to modern workflows, prompt 
 * **Improve Prompt**: Score-guided rewrite loop — BERT structural probes → Mistral rewrite → real re-score (threshold default **80**).
 * **Env-based Config**: API URLs and secrets loaded from `.env` (never hardcode keys).
 * **Colored Server Logs**: Production-style logging with timestamps, levels, and truncated prompts.
-* **Data Balancing**: Mitigates "Mode Collapse" (the "Tower of 65" problem) via up-sampling in training notebooks.
+* **Data Balancing**: Mitigates "Mode Collapse" (the "Tower of 65" problem) via up-sampling — see notebooks under `training/`.
 * **Live Demo**: https://prompt-analyzer-omega.vercel.app/
 
 ---
@@ -153,19 +153,25 @@ Open http://127.0.0.1:5000
 
 ```text
 Prompt-Analyzer/
-├── static/                 # CSS / JS / assets
-├── templates/              # Flask HTML
-├── app_flow.py             # Analyze + improve orchestration
-├── main.py                 # Flask routes
-├── logging_config.py       # Colored production-style logging
-├── prompt_log.py           # In-memory prompt event buffer
-├── .env.example            # Env template (no secrets)
-├── dataset_EDA.ipynb       # Data cleaning / Tower of 65 analysis
-├── final_clean_bert_data.csv
-├── model_train.ipynb       # BERT fine-tuning
+├── static/                      # CSS / JS / assets
+├── templates/                   # Flask HTML
+├── training/                    # Offline BERT dataset + training (not used at runtime)
+│   ├── README.md
+│   ├── data/
+│   │   └── final_clean_bert_data.csv
+│   └── notebooks/
+│       ├── dataset_EDA.ipynb
+│       └── model_train.ipynb
+├── app_flow.py                  # Analyze + improve orchestration
+├── main.py                      # Flask routes
+├── logging_config.py            # Colored production-style logging
+├── prompt_log.py                # In-memory prompt event buffer
+├── .env.example                 # Env template (no secrets)
 ├── requirements.txt
 └── vercel.json
 ```
+
+Training notebooks and the CSV are documented in [`training/README.md`](training/README.md). They are **not** needed to run the live analyzer.
 
 ---
 
